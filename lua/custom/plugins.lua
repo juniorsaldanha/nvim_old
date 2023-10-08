@@ -118,6 +118,15 @@ local plugins = {
   },
 
   {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require "custom.configs.bufferline"
+    end,
+  },
+
+  {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
     config = function()
