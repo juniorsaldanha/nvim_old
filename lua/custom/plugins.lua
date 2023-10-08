@@ -1,4 +1,4 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -25,7 +25,7 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
 
   {
@@ -33,8 +33,10 @@ local plugins = {
     opts = overrides.treesitter,
   },
 
+  -- disable nvim-tree for use neo-tree instead
   {
     "nvim-tree/nvim-tree.lua",
+    enabled = false,
     opts = overrides.nvimtree,
   },
 
@@ -47,6 +49,101 @@ local plugins = {
     end,
   },
 
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+      {
+        "s1n7ax/nvim-window-picker",
+        version = "3.*",
+        config = function()
+          require "custom.configs.window-picker"
+        end,
+      },
+    },
+    config = function()
+      require "custom.configs.neo-tree"
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = function()
+      return require "custom.keymaps.which-key"
+    end,
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    event = "BufReadPre",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+      require "custom.configs.todo-comments"
+    end,
+  },
+
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+
+  {
+    "psliwka/vim-smoothie",
+    config = function()
+      require "custom.configs.vim-smoothie"
+    end,
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+  },
+
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    config = function()
+      require "custom.configs.persistence"
+    end,
+  },
+
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
+
+  {
+    "f-person/git-blame.nvim",
+    event = "BufRead",
+    config = function()
+      require "custom.configs.git-blame"
+    end,
+  },
+
+  {
+    "zbirenbaum/copilot.lua",
+    event = { "InsertEnter" },
+    -- NOTE: Load the plugin settings with delay
+    config = function()
+      -- @diagnostic disable-next-line: param-type-mismatch
+      vim.defer_fn(function()
+        require "custom.configs.copilot"
+        -- @diagnostic disable-next-line: param-type-mismatch
+      end, 200)
+    end,
+  },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",

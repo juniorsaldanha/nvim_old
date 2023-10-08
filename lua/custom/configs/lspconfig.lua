@@ -1,9 +1,12 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
-local lspconfig = require "lspconfig"
+local present, lspconfig = pcall(require, "lspconfig")
+if not present then
+  print("Error on loading lspconfig")
+  return
+end
 
--- if you just want default config for the servers then put them in a table
 local servers = { "html", "cssls", "tsserver", "clangd" }
 
 for _, lsp in ipairs(servers) do
@@ -13,5 +16,5 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- 
+--
 -- lspconfig.pyright.setup { blabla}

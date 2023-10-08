@@ -1,4 +1,8 @@
-local null_ls = require "null-ls"
+local present, null_ls = pcall(require, "null-ls")
+if not present then
+  print("Error on loading null-ls")
+  return
+end
 
 local b = null_ls.builtins
 
