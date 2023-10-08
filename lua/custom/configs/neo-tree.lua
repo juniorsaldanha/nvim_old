@@ -1,4 +1,4 @@
-local present, neotree = pcall(require, "neotree")
+local present, neotree = pcall(require, "neo-tree")
 if not present then
   print("Error on loading neotree")
   return
