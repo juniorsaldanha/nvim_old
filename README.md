@@ -16,6 +16,15 @@ Check everything:
 - linters
 - copilot
 - keybindings
+- noice
+- trouble
+- bufferline
+- persistence
+- git-blame
+- window-picker
+- vim-smoothie
+- todo-comments
+- better-escape
 - and more (i'll be adding and improving regularly
 
 @UmSaldanha on x.com
