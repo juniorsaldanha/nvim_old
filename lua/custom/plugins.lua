@@ -33,14 +33,13 @@ local plugins = {
     opts = overrides.treesitter,
   },
 
-  -- disable nvim-tree for use neo-tree instead
+  -- NOTE: disabling nvim-tree for use neo-tree instead
   {
     "nvim-tree/nvim-tree.lua",
     enabled = false,
     opts = overrides.nvimtree,
   },
 
-  -- Install a plugin
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -69,6 +68,7 @@ local plugins = {
       require "custom.configs.neo-tree"
     end,
   },
+
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -77,7 +77,8 @@ local plugins = {
       vim.o.timeoutlen = 300
     end,
     opts = function()
-      return require "custom.keymaps.which-key"
+      local opts = require "custom.keymaps.which-key"
+      return opts
     end,
   },
 
@@ -90,24 +91,20 @@ local plugins = {
     end,
   },
 
+  -- TODO:Add keymap for it F9 and add on which-key menu <leader> something
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
 
+  -- TODO: Add keymap for it for using cmd+j and cmd+k
   {
     "psliwka/vim-smoothie",
+    event = "BufReadPre",
     config = function()
       require "custom.configs.vim-smoothie"
     end,
   },
-
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {},
-  },
-
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -144,19 +141,6 @@ local plugins = {
       end, 200)
     end,
   },
-  -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
-
-  -- All NvChad plugins are lazy-loaded by default
-  -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-  -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-  -- {
-  --   "mg979/vim-visual-multi",
-  --   lazy = false,
-  -- }
 }
 
 return plugins
