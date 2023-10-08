@@ -1,10 +1,11 @@
 local present, null_ls = pcall(require, "null-ls")
 if not present then
-  print("Error on loading null-ls")
+  print "Error on loading null-ls"
   return
 end
 
 local b = null_ls.builtins
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local sources = {
 
@@ -17,9 +18,31 @@ local sources = {
 
   -- cpp
   b.formatting.clang_format,
+
+  -- Go
+  b.formatting.gofumpt,
+  b.formatting.goimports_reviser,
+  b.formatting.golines,
 }
+
+local attach = function(client, bufnr)
+  if client.supports_method "textDocument/formatting" then
+    vim.api.nvim_clear_autocmds {
+      group = augroup,
+      buffer = bufnr,
+    }
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format { bufnr = bufnr }
+      end,
+    })
+  end
+end
 
 null_ls.setup {
   debug = true,
   sources = sources,
+  attach = attach,
 }
