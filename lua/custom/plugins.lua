@@ -97,7 +97,6 @@ local plugins = {
     cmd = "TroubleToggle",
   },
 
-  -- TODO: Add keymap for it for using cmd+j and cmd+k
   {
     "psliwka/vim-smoothie",
     event = "BufReadPre",
@@ -105,6 +104,19 @@ local plugins = {
       require "custom.configs.vim-smoothie"
     end,
   },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require "custom.configs.noice"
+    end,
+  },
+
   {
     "folke/persistence.nvim",
     event = "BufReadPre", -- this will only start session saving when an actual file was opened
