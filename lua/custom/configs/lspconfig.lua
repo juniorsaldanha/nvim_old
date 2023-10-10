@@ -22,7 +22,7 @@ lspconfig.gopls.setup {
   capabilities = capabilities,
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
-  root_dir = util.root_pattern("go.mod", ".git"),
+  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
   settings = {
     gopls = {
       analyses = {

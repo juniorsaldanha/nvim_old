@@ -70,6 +70,17 @@ local plugins = {
   },
 
   {
+    "NvChad/nvterm",
+    init = function()
+      require("core.utils").load_mappings "nvterm"
+    end,
+    config = function()
+      require "base46.term"
+      require "custom.configs.nvterm"
+    end,
+  },
+
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()

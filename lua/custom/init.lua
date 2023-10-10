@@ -6,3 +6,5 @@
 --   command = "tabdo wincmd =",
 -- })
 vim.opt.termguicolors = true
+vim.wo.relativenumber = true
+vim.opt.colorcolumn = "80"

@@ -44,6 +44,7 @@ M.mason = {
     "gofumpt",
     "goimports-reviser",
     "gomodifytags",
+    "golines",
 
     -- azure-pipeline
     "azure-pipelines-language-server",
