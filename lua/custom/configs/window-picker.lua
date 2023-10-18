@@ -1,10 +1,10 @@
 local present, window_picker = pcall(require, "window-picker")
 if not present then
-  print("Error on loading window-picker")
+  print "Error on loading window-picker"
   return
 end
 
-window_picker.setup({
+window_picker.setup {
   hint = "floating-big-letter",
   selection_char = "ASDF;LKJ",
   filter_rules = {
@@ -18,4 +18,4 @@ window_picker.setup({
       buftype = { "terminal", "quickfix" },
     },
   },
-})
+}
