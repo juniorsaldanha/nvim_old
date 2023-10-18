@@ -6,7 +6,7 @@ end
 
 window_picker.setup {
   hint = "floating-big-letter",
-  selection_char = "ASDF;LKJ",
+  selection_char = "ASF;LKJ",
   filter_rules = {
     include_current_win = false,
     autoselect_one = true,

@@ -51,6 +51,9 @@ M.mason = {
 
     -- yaml
     "yaml-language-server",
+
+    -- json
+    "jsonlint",
   },
 }
 
